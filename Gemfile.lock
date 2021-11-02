@@ -82,6 +82,7 @@ GEM
     ffi (1.15.4)
     globalid (0.5.2)
       activesupport (>= 5.0)
+    graphql (1.12.16)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     listen (3.7.0)
@@ -108,6 +109,8 @@ GEM
       nio4r (~> 2.0)
     racc (1.6.0)
     rack (2.2.3)
+    rack-cors (1.1.1)
+      rack (>= 2.0.0)
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.4.1)
@@ -185,8 +188,10 @@ DEPENDENCIES
   bootsnap (>= 1.4.4)
   byebug
   devise_token_auth
+  graphql
   listen (~> 3.3)
   puma (~> 5.0)
+  rack-cors
   rails (~> 6.1.4, >= 6.1.4.1)
   rubocop
   spring

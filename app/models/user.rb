@@ -9,4 +9,12 @@ class User < ApplicationRecord
 
   # Validates
   validates :full_name, length: { minimum: 3, maximum: 100 }
+
+  squishize :full_name, :email
+
+  # Scopes
+
+  add_scope :search do |query|
+    where('full_name like ?', "%#{query}%") if query.present?
+  end
 end
