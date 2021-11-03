@@ -1,6 +1,8 @@
 class GraphqlController < ApplicationController
   NotAuthorized = Class.new(StandardError)
 
+  skip_before_action :authenticate_user!, only: :execute
+
   def execute
     variables = prepare_variables(params[:variables])
     query = params[:query]

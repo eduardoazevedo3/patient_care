@@ -1,18 +1,15 @@
 module Mutations
-  class Users::SignIn < Mutations::BaseMutation
+  class Users::Create < Mutations::BaseMutation
     skip_callback :resolved, :before, :authenticate_user!
 
-    argument :email, String, required: true
-    argument :password, String, required: true
+    argument :input, Types::UserInput, required: true
 
     field :user, Types::User, null: true
     field :credential, Types::Credential, null: true
 
-    def call(email:, password:)
-      user = User.find_for_authentication(uid: email)
-      user = nil unless user&.valid_password?(password)
-
-      raise GraphqlController::NotAuthorized, I18n.t('devise.failure.invalid', authentication_keys: 'email') unless user
+    def call(input:)
+      user = User.new(input.to_h)
+      user.save!
       response(user)
     end
 

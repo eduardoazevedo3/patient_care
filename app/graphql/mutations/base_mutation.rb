@@ -15,7 +15,7 @@ module Mutations
     private
 
     def authenticate_user!
-      raise 'unauthorized' unless current_user
+      raise GraphqlController::NotAuthorized, I18n.t('devise.failure.unauthenticated') unless current_user
     end
 
     def current_user
