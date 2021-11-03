@@ -7,26 +7,27 @@ class Types::PageInfo < Types::BaseObject
   field :has_previous_page, Boolean, null: false
 
   def pages
-    (total.to_f / per_page).ceil
+    (total.to_i / per_page).ceil
   end
 
   def current_page
-    context.to_h[:current_arguments][:page] || 1
+    object.arguments[:page] || 1
   end
 
   def per_page
-    context.to_h[:current_arguments][:per_page] || 100
+    limit = object.arguments[:per_page] || 30
+    limit.between?(1, 100) ? limit : 100
   end
 
   def total
-    @total ||= object.items.count
+    @total ||= object.items.unscope(:select, :limit, :offset).count
   end
 
   def has_next_page # rubocop:disable Naming/PredicateName
-    (current_page + 1) > pages
+    pages > current_page
   end
 
   def has_previous_page # rubocop:disable Naming/PredicateName
-    current_page.positive?
+    current_page > 1
   end
 end

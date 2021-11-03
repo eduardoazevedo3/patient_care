@@ -17,6 +17,7 @@ class ApplicationRecord < ActiveRecord::Base
   def self.paginate(args = {})
     args[:page] ||= 1
     args[:per_page] ||= 100
+    args[:per_page] = 100 if args[:per_page] > 100
 
     limit(args[:per_page])
       .offset((args[:page].positive? ? args[:page] - 1 : 0) * args[:per_page])
