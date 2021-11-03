@@ -28,6 +28,9 @@ gem 'rack-cors'
 gem 'devise_token_auth'
 gem 'graphql'
 
+# I know this shouldn't be here, but I need it in the seed file in the production environment
+gem 'ffaker'
+
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
