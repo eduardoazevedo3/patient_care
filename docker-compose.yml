@@ -1,0 +1,21 @@
+version: "3.9"
+
+services:
+  api:
+    restart: always
+    image: eduardoazevedo3/patient-care:latest
+    container_name: patientcare-api
+    build: .
+    ports:
+      - "3010:3010"
+    environment:
+      - RAILS_ENV=production
+    volumes:
+      - cache:/patient-care/tmp/cache
+      - storage:/patient-care/storage
+      - sqlite3:/patient-care/db/sqlite3
+
+volumes:
+  cache: {}
+  storage: {}
+  sqlite3: {}

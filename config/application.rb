@@ -7,7 +7,7 @@ require 'active_job/railtie'
 require 'active_record/railtie'
 require 'active_storage/engine'
 require 'action_controller/railtie'
-# require "action_mailer/railtie"
+require 'action_mailer/railtie'
 require 'action_mailbox/engine'
 require 'action_text/engine'
 require 'action_view/railtie'
@@ -22,7 +22,7 @@ Bundler.require(*Rails.groups)
 module PatientCare
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 6.1
+    config.load_defaults(6.1)
 
     # Configuration for the application, engines, and railties goes here.
     #
